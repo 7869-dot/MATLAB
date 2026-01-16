@@ -1,0 +1,66 @@
+%{
+        Ball bouncing program
+%}
+
+% I am buillding a simple ball bouncing simulation with gravity
+
+
+% After you a script in matlap we have to make sure that the memory is in
+% clean state 
+
+clear;
+close all;
+clc;
+
+% Now i am building the physics in the system
+
+g = 9.8; % in meters persecond
+e = 0.8; % this is the value of restituion
+deta_time = 0.001; %this is the time step
+
+% now setting up the sim size
+
+xlim([0 1]) % one meter horizontal span 
+ylim([0 2]) % one meter vertical span
+axis equal
+grid on
+
+% ball properties
+
+ball.r = 0.05; %radius in meters
+ball.m = 0,2; % mass in kg
+ball.pos = [0, 1.5]; %from the xy axis
+ball.e = 0,8; 
+
+% --- Figure / world setup ---
+Lx = 2;              % world width (m)
+Ly = 2;              % world height (m)
+
+figure('Color','b');
+ax = axes; hold(ax,'on'); grid(ax,'on');
+xlim(ax,[0 Lx]); ylim(ax,[0 Ly]);
+axis(ax,'equal');
+
+title(ax,'Bouncing Ball');
+xlabel(ax,'x (m)'); ylabel(ax,'y (m)');
+
+% ground line
+plot(ax,[0 Lx],[0 0],'k','LineWidth',2);
+
+% (optional) smoother animation
+set(gcf,'DoubleBuffer','on');
+
+% Main simulation loop
+t = 0;
+t_end = 10;
+
+fig = gcs; % this means that get current system
+ax = gca; % this mean that get current axes
+
+ballHandle = rectangle(ax, ...
+    'Position', [x-r, y-r, 2*r, 2*r], ...
+    'Curvature', [1 1], ...
+    'FaceColor', w, ...
+    'EdgeColor', 'k');
+
+
